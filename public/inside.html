@@ -1,0 +1,57 @@
+<div id="main">
+	<div id="error-message">
+		<strong>ERROR:</strong>
+		<span></span>
+		<a href>Refresh</a>
+	</div>							
+	<div id="wrap">
+		<nav>
+			<a class="previous" ng:click="previousDate()">Previous</a>
+			<a class="today" ng:click="goToToday()">Today</a>
+			<a class="next" ng:click="nextDate()">Next</a>
+		</nav>
+		<div><h1>{{currentDate.toLocaleDateString()}}</h1></div>
+		<div class="tasks">
+			<p class="message-blank" ng:show="! hasStarted(tasks)">
+				<button class="start-tracking" type="Submit" ng:click="startTimer()">Start</button> tracking my time
+			</p>
+			<ul id="completed-tasks" ng:repeat="task in tasks.$filter(TaskViewHelper.isCompleted).$orderBy('completedAt', false)">
+				<li class="task" ng:controller="TaskController">
+					<div class="duration">{{task.duration}}</div>
+					<input class="is-done" type="checkbox" ng:click="unFinish()" ng:disabled="{{task.title == 'Start'}}" checked  />
+					<div class="title-done">{{task.title}}</div>
+					<div class="tag">{{task.tag}}</div>
+				</li>
+			</ul>				
+				
+			<ul id="tasks-to-complete" ng:repeat="task in tasks.$filter(TaskViewHelper.isNotCompleted).$orderBy('createdAt', false)">
+				<li class="task" ng:show="!(task.deleted) && !(task.editing)" ng:controller="TaskController">
+					<input class="is-done" type="checkbox" ng:click="finish()" />
+					<div class="title">{{ task.title }} </div>
+					<a class="edit" title="Edit" ng:click="task.editing = true">&nbsp;</a>
+					<a class="destroy" title="Destroy" ng:click="destroy()">&times;</a>
+					<div class="tag">{{ task.tag }}</div>	
+				</li>
+
+				<li ng:show="task.editing"  ng:controller="TaskController">
+					<!-- adding form - in that good thin-->
+					<form ng:submit="saveTitle()" >
+						<input type="text" ng:model="task.title" class="edit-task" required/>
+					</form>
+				</li>
+
+				<!-- sticking with #id so we don't touch peepcode css, but undo is multi-level -->
+				<li id="undo-template" class="task" ng:show="task.deleted" ng:controller="TaskController">
+					<div class="undo-button" ng:click="undoDelete()">UNDO</div>
+					<div class="title">{{ task.title }}</div>	
+					<div class="tag">{{ task.tag }}</div>
+				</li>
+			</ul>
+		</div>
+		<form ng:submit="addTask()" id="newTaskForm">
+			<div class="type">✐</div>
+			<!-- validation placement is off -->
+			<input id="new-task" type="text" placeholder="Type a new task..." ng:model="newTaskValue" required/>
+		</form>
+	</div>
+</div>

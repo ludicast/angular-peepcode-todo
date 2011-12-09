@@ -1,16 +1,11 @@
-Simple Model: A backbone.js demo
+Angularjs port of peepcode example
 ==================================
 
-This demo loads only a simple model and view. It displays no content and must be driven from the command line.
+This example seeks to do a code reduction in LOC
 
-USAGE
-=====
+    cat app/coffeescripts/time_log.coffee app/coffeescripts/time_log/* | wc
+    493    1386   15160
 
-Run:
-
-    rake server
-
-Visit the webserver at:
-
-    http://localhost:9292
+    wc app/coffeescripts/time_log/angular-code.coffee 
+    99     232    2368 app/coffeescripts/time_log/angular-code.coffee
 
