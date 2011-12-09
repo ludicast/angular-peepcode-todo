@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TimeLog</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="/stylesheets/screen.css" media="screen" />
+
+    <script src="/javascripts/vendor/jquery.js"></script>
+    <script src="/javascripts/vendor/underscore.js"></script>
+    <script src="/javascripts/vendor/backbone.js"></script>
+
+    <script src="/javascripts/time_log/util.js"></script>
+    <script src="/javascripts/time_log/models.js"></script>
+    <script src="/javascripts/time_log/collections.js"></script>
+    <script src="/javascripts/time_log/views.js"></script>
+    <script src="/javascripts/time_log/routers.js"></script>
+    <script src="/javascripts/time_log.js"></script>
+
+    <!-- Templates -->
+
+    <script type="text/template" id="date-title-template">
+      <h1><%= app.Util.formatDateAsTitle(date) %></h1>
+    </script>
+
+    <script type="text/template" id="elapsed-clock-template">
+      <div class="elapsed">
+        <time class="elapsed-duration"><%= app.Util.formatSecondsAsTime(elapsedSeconds) %></time> has elapsed
+      </div>
+    </script>
+
+    <script type="text/template" id="clocks-template">
+      <div class="total-clock">
+        <time class="total-duration"><%= app.Util.formatSecondsAsTime(duration) %></time>
+        <div class="total-time">Total</div>
+      </div>
+
+      <% _.each(tagReports, function(tagReport) { %>
+      <div class="tag-clock">
+        <time class="total-duration"><%= app.Util.formatSecondsAsTime(tagReport.duration) %></time>
+        <div class="tag"><%= tagReport.name %></div>
+      </div>
+      <% }); %>
+    </script>
+
+    <script type="text/template" id="completed-task-template">
+      <div class="duration"><%= app.Util.formatSecondsAsTime(duration) %></div>
+      <input class="is-done" type="checkbox" checked />
+      <div class="title-done"><%= app.Util.escapeHTML(title) %></div>
+      <div class="tag"><%= tag %></div>
+    </script>
+
+    <script type="text/template" id="incomplete-task-template">
+      <input class="is-done" type="checkbox" />
+      <div class="title"><%= app.Util.escapeHTML(title) %></div>
+      <a class="edit" title="Edit">&nbsp;</a>
+      <a class="destroy" title="Destroy">&times;</a>
+      <div class="tag"><%= tag %></div>
+    </script>
+
+    <script type="text/template" id="undo-template">
+      <div class="undo-button">UNDO</div> 
+      <div class="title"><%= title %></div>
+      <div class="tag"><%= tag %></div>
+    </script>
+
+    <script type="text/template" id="blank-state-template">
+      <p class="message-blank">
+        <button class="start-tracking" type="Submit">Start</button> tracking my time
+      </p>
+    </script>
+
+    <script type="text/template" id="tasks-template">
+      <!-- CompletedTasksView -->
+
+      <!-- ClocksView -->
+
+      <!-- ElapsedClockView -->
+
+      <!-- TasksToCompleteView -->
+    </script>
+
+    <script type="text/template" id="new-task-template">
+      <div class="type">✐</div><input id="new-task" type="text" placeholder="Type a new task..." />
+      <div id="warning">Your task is blank! Please type something you want to do.</div>
+    </script>
+
+    <script type="text/template" id="menu-template">
+      <a class="previous">Previous</a> &nbsp;
+      <a class="today">Today</a> &nbsp;
+      <a class="next">Next</a>
+    </script>
+
+  </head>
+
+  <body>
+    <div id="main" data-yield="main">
+      <div id="error-message"><strong>ERROR:</strong> <span></span> <a href="">Refresh</a></div>
+      <div id="wrap">
+        <!-- MenuView -->
+
+        <!-- DateTitleView -->
+
+        <!-- TasksView -->
+
+        <!-- NewTaskView -->
+
+        <!-- TODO: Blank state -->
+
+      </div>
+    </div>
+    <div class="specs">
+      <a href="/test-js/SpecRunner.html">Run Specs</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+$sans: "Helvetica Neue"
+$serif: Georgia
+
+body, h1, h2, h3, p, ul, li
+  font-family: $sans
+
+h1 
+  text-transform: uppercase
+  font:
+    weight: 200
+    size: 1em
+  letter-spacing: 1px
+  color: $h1
+
+nav
+  a
+    color: $nav-link
+    text-transform: uppercase
+    font:
+      weight: bold
+      size: 11px
+      family: $sans
+    text-decoration: none
+    letter-spacing: 1px
+    cursor: pointer
+
+    &:hover
+      color: $nav-link-hover
+
+.total-clock
+  color: $h1
+  font:
+    size: 1.5em
+    family: $sans
+
+  time 
+    font:
+      weight: 400
+    letter-spacing: 0
+
+  .total-time
+    text-transform: uppercase
+    font:
+      weight: 400
+      size: 0.5em
+      family: $sans
+    letter-spacing: 1px
+    color: $totaltime
+    
+.tag-clock
+  font:
+    size: 1.2em
+    family: $sans
+    weight: 200
+
+  time 
+    font:
+      weight: 200
+    letter-spacing: 1px
+    color: $gray-light
+
+  .tag
+    text-transform: uppercase
+    font:
+      weight: bold
+      size: 11px
+      family: $sans
+    letter-spacing: 1px
+    color: $tag-fade
+
+p, ul, li
+  font-weight: normal
+  font-family: $serif
+
+ul, li
+  font-size: 1.1em
+  
+li
+  color: $text
+  border-bottom: 1px solid $border
+  
+  .title-done
+    color: $gray
+    font:
+      style: italic
+  
+  .duration 
+    text-align: right
+    color: $gray-light
+    font:
+      family: $sans
+      weight: 200
+    
+  .destroy
+    font:
+      size: 0.8em
+      weight: bold
+    text-decoration: none
+    color: $destroy
+    border: 1px solid $border
+    @include border-radius(10px)
+    
+    &:hover
+      color: $error-red
+      border: 1px solid $error-red
+      
+  .edit
+    color: $edit
+    font:
+      size: 1em
+      family: $sans
+    letter-spacing: 1px
+    
+    &:hover
+      color: $yellow-dark
+    
+  
+  .tag
+    color: $tag
+    font:
+      size: 0.8em
+      variant: small-caps
+      weight: bold    
+      family: $sans 
+    letter-spacing: 1px
+    text-transform: lowercase 
+
+#undo-template
+    
+  .undo-button
+    font:
+      family: $sans
+      size: 0.7em
+    color: $gray-light
+    letter-spacing: 1px
+    border: 1px solid $border
+    @include border-radius(10px)
+    
+    &:hover
+      color: $error-red
+      border: 1px solid $error-red
+    
+  .title, .tag
+    font:
+      style: italic
+    text-decoration: line-through
+    color: $gray-light
+
+.message-blank
+  font:
+    family: $sans
+    size: 1.7em
+  color: $h1
+    
+.start-tracking
+  @include border-radius(20px)
+  background-color: $start-button-bg
+  border: 1px solid $start-button-border
+  font:
+    size: 1em
+    family: $sans
+    weight: 600
+  text-transform: uppercase
+  letter-spacing: 1px
+  color: $start-button-color
+  
+  &:hover
+    background-color: $peach
+    border: 1px solid $bg
+    color: white
+
+.elapsed-clock
+  background-color: $peach
+  
+  .elapsed  
+    text-transform: uppercase
+    font:
+      weight: 200
+      family: $sans
+    letter-spacing: 2px
+    line-height: 1.5em
+    color: $white
+  
+    .elapsed-duration
+      font:
+        size: 1.2em
+        family: $sans
+        weight: 600
+      letter-spacing: 2px
+      color: $elapsedtime
+
+#new-task, .edit-task
+  font:
+    size: 1em
+    family: $serif
+  color: $text
+  background-color: $white
+  border: 1px dotted $highlight
+  padding: 5px
+
+#warning
+  color: $warning-text-color
+  display: none
+  font:
+    size: 1em
+
+.specs
+  a 
+    font-size: 12px
+    text-decoration: none
+    color: $specs-link
+    border-bottom: 1px solid $specs-link-border
+
+#error-message
+  background-color: $error-background-color
+  font:
+    weight: 200
+    family: $sans
+  letter-spacing: 2px
+  line-height: 1.5em
+  color: $white
+
+  strong
+    font-weight: 400
+
+  a, a:visited
+    color: white
+    font:
+      weight: 600
+      size: 0.8em
+    text:
+      transform: uppercase
+      decoration: none
+    border-bottom: 1px dotted white
+
+    &:hover
+      border-bottom: 1px solid white

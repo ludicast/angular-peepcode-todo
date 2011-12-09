@@ -1,0 +1,215 @@
+@import colors
+
+$top: 40px
+
+body
+  margin: 0px 0 30px 0  
+  background-color: $bg
+
+#main
+  width: 670px
+  padding:
+    top: 0
+    right: 20px
+    bottom: 20px
+    left: 20px
+  margin: 0 auto
+  position: relative
+  background-color: #fff
+
+  #wrap 
+    width: 610px
+    margin: 0 auto
+    padding: 
+      top: $top
+      right: 30px
+      bottom: 30px
+      left: 30px
+    border:
+      right: 1px dotted $outer-border
+      bottom: 1px dotted $outer-border
+      left: 1px dotted $outer-border
+
+    nav
+      position: absolute
+      top: 48px
+      right: 65px
+
+      a.previous:before
+        content: "\25C0  "
+      a.next:after
+        content: " \25B6"
+
+  
+    ul
+      margin: 0
+      padding: 10px
+
+    .tasks
+    
+      .clocks
+        width: 100%
+        margin: 0 0 35px 0
+        padding: 0
+        overflow: auto
+        
+        .total-clock
+          width: 85px
+          margin:
+            top: 2px
+            bottom: 10px
+            left: 0
+          padding:
+            left: 0
+        
+        .tag-clock
+          width: 75px
+          margin:
+            top: 9px
+            bottom: 0
+          padding: 0
+      
+      .total-clock, .tag-clock
+        float: left
+        height: 40px
+        text-align: left
+        
+        time
+          display: block
+          text-align: center
+
+        .total-time
+          text-align: center
+            
+        .tag
+          text-align: center
+      
+      li
+        position: relative
+        list-style-type: none
+        margin: 0
+        padding:
+          top: 7px
+          bottom: 5px
+        
+        .duration
+          position: absolute
+          left: 0
+          text-align: right
+          width: 50px
+
+        .is-done
+          float: left
+          margin:
+            top: 8px
+            left: 65px
+
+        .title, .title-done
+          margin-left: 85px
+          padding:
+            top: 2px
+            right: 70px
+            bottom: 5px
+
+        .destroy
+          position: absolute
+          top: 9px
+          left: 1px
+          display: block
+          padding:
+            right: 0.3em
+            left: 0.3em
+            bottom: 0.1em
+          z-index: 500
+          cursor: pointer
+          
+        .edit
+          position: absolute
+          top: 9px
+          left: 32px
+          display: block
+          padding:
+            left: 1px
+          cursor: pointer
+          
+          &:before
+            content: "\270E"
+          
+
+        .tag
+          position: absolute
+          bottom: 2px
+          right: 2px
+          display: block
+          padding:
+            right: 5px
+            bottom: 3px
+            left: 5px
+          z-index: 0
+          
+      #undo-template
+        .undo-button
+          position: absolute
+          left: 0
+          top: 9px
+          text-align: center
+          width: 50px
+          padding: 0.2em 0.2em 0.2em 0.3em
+          cursor: pointer
+      
+      .elapsed-clock
+        width: 660px
+        margin:
+          left: -30px
+        padding: 5px
+        
+        .elapsed
+          text-align: center
+          margin: 0 auto
+          padding: 0
+          
+          .elapsed-duration
+            margin: auto
+            padding:
+              right: 5px
+              left: 9px
+        
+    #new-task, #warning, .edit-task
+      width: 80%
+      margin:
+        top: 7px
+
+    .edit-task
+      margin-left: 80px
+        
+    #warning
+      margin:
+        top: 10px
+        left: 90px
+        
+    .type
+      margin:
+        top: 12px
+        right: 10px
+      float: left
+      width: 80px
+      text-align: right
+      
+.message-blank
+  padding: 20px 0px 20px 0px
+  text-align: center
+  
+.start-tracking
+  margin: 0
+  padding: 2px 10px
+  cursor: pointer
+
+.specs
+  text-align: center
+  margin:
+    top: 1em
+    bottom: 1em
+
+#error-message
+  padding: 0.5em 1em
+  display: none

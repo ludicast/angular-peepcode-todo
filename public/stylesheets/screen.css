@@ -1,0 +1,353 @@
+body {
+  margin: 0px 0 30px 0;
+  background-color: #e0e0e0; }
+
+#main {
+  width: 670px;
+  padding-top: 0;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white; }
+  #main #wrap {
+    width: 610px;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    border-right: 1px dotted #cccccc;
+    border-bottom: 1px dotted #cccccc;
+    border-left: 1px dotted #cccccc; }
+    #main #wrap nav {
+      position: absolute;
+      top: 48px;
+      right: 65px; }
+      #main #wrap nav a.previous:before {
+        content: "\25C0  "; }
+      #main #wrap nav a.next:after {
+        content: " \25B6"; }
+    #main #wrap ul {
+      margin: 0;
+      padding: 10px; }
+    #main #wrap .tasks .clocks {
+      width: 100%;
+      margin: 0 0 35px 0;
+      padding: 0;
+      overflow: auto; }
+      #main #wrap .tasks .clocks .total-clock {
+        width: 85px;
+        margin-top: 2px;
+        margin-bottom: 10px;
+        margin-left: 0;
+        padding-left: 0; }
+      #main #wrap .tasks .clocks .tag-clock {
+        width: 75px;
+        margin-top: 9px;
+        margin-bottom: 0;
+        padding: 0; }
+    #main #wrap .tasks .total-clock, #main #wrap .tasks .tag-clock {
+      float: left;
+      height: 40px;
+      text-align: left; }
+      #main #wrap .tasks .total-clock time, #main #wrap .tasks .tag-clock time {
+        display: block;
+        text-align: center; }
+      #main #wrap .tasks .total-clock .total-time, #main #wrap .tasks .tag-clock .total-time {
+        text-align: center; }
+      #main #wrap .tasks .total-clock .tag, #main #wrap .tasks .tag-clock .tag {
+        text-align: center; }
+    #main #wrap .tasks li {
+      position: relative;
+      list-style-type: none;
+      margin: 0;
+      padding-top: 7px;
+      padding-bottom: 5px; }
+      #main #wrap .tasks li .duration {
+        position: absolute;
+        left: 0;
+        text-align: right;
+        width: 50px; }
+      #main #wrap .tasks li .is-done {
+        float: left;
+        margin-top: 8px;
+        margin-left: 65px; }
+      #main #wrap .tasks li .title, #main #wrap .tasks li .title-done {
+        margin-left: 85px;
+        padding-top: 2px;
+        padding-right: 70px;
+        padding-bottom: 5px; }
+      #main #wrap .tasks li .destroy {
+        position: absolute;
+        top: 9px;
+        left: 1px;
+        display: block;
+        padding-right: 0.3em;
+        padding-left: 0.3em;
+        padding-bottom: 0.1em;
+        z-index: 500;
+        cursor: pointer; }
+      #main #wrap .tasks li .edit {
+        position: absolute;
+        top: 9px;
+        left: 32px;
+        display: block;
+        padding-left: 1px;
+        cursor: pointer; }
+        #main #wrap .tasks li .edit:before {
+          content: "\270E"; }
+      #main #wrap .tasks li .tag {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        display: block;
+        padding-right: 5px;
+        padding-bottom: 3px;
+        padding-left: 5px;
+        z-index: 0; }
+    #main #wrap .tasks #undo-template .undo-button {
+      position: absolute;
+      left: 0;
+      top: 9px;
+      text-align: center;
+      width: 50px;
+      padding: 0.2em 0.2em 0.2em 0.3em;
+      cursor: pointer; }
+    #main #wrap .tasks .elapsed-clock {
+      width: 660px;
+      margin-left: -30px;
+      padding: 5px; }
+      #main #wrap .tasks .elapsed-clock .elapsed {
+        text-align: center;
+        margin: 0 auto;
+        padding: 0; }
+        #main #wrap .tasks .elapsed-clock .elapsed .elapsed-duration {
+          margin: auto;
+          padding-right: 5px;
+          padding-left: 9px; }
+    #main #wrap #new-task, #main #wrap #warning, #main #wrap .edit-task {
+      width: 80%;
+      margin-top: 7px; }
+    #main #wrap .edit-task {
+      margin-left: 80px; }
+    #main #wrap #warning {
+      margin-top: 10px;
+      margin-left: 90px; }
+    #main #wrap .type {
+      margin-top: 12px;
+      margin-right: 10px;
+      float: left;
+      width: 80px;
+      text-align: right; }
+
+.message-blank {
+  padding: 20px 0px 20px 0px;
+  text-align: center; }
+
+.start-tracking {
+  margin: 0;
+  padding: 2px 10px;
+  cursor: pointer; }
+
+.specs {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
+#error-message {
+  padding: 0.5em 1em;
+  display: none; }
+
+body, h1, h2, h3, p, ul, li {
+  font-family: "Helvetica Neue"; }
+
+h1 {
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 1em;
+  letter-spacing: 1px;
+  color: #777777; }
+
+nav a {
+  color: #ffaa31;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 11px;
+  font-family: "Helvetica Neue";
+  text-decoration: none;
+  letter-spacing: 1px;
+  cursor: pointer; }
+  nav a:hover {
+    color: #bbbbbb; }
+
+.total-clock {
+  color: #777777;
+  font-size: 1.5em;
+  font-family: "Helvetica Neue"; }
+  .total-clock time {
+    font-weight: 400;
+    letter-spacing: 0; }
+  .total-clock .total-time {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.5em;
+    font-family: "Helvetica Neue";
+    letter-spacing: 1px;
+    color: #bbbbbb; }
+
+.tag-clock {
+  font-size: 1.2em;
+  font-family: "Helvetica Neue";
+  font-weight: 200; }
+  .tag-clock time {
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: #bbbbbb; }
+  .tag-clock .tag {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: "Helvetica Neue";
+    letter-spacing: 1px;
+    color: #65c5cb; }
+
+p, ul, li {
+  font-weight: normal;
+  font-family: Georgia; }
+
+ul, li {
+  font-size: 1.1em; }
+
+li {
+  color: #535353;
+  border-bottom: 1px solid #e0e0e0; }
+  li .title-done {
+    color: #999999;
+    font-style: italic; }
+  li .duration {
+    text-align: right;
+    color: #bbbbbb;
+    font-family: "Helvetica Neue";
+    font-weight: 200; }
+  li .destroy {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #bbbbbb;
+    border: 1px solid #e0e0e0;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px; }
+    li .destroy:hover {
+      color: #ff3e13;
+      border: 1px solid #ff3e13; }
+  li .edit {
+    color: #bbbbbb;
+    font-size: 1em;
+    font-family: "Helvetica Neue";
+    letter-spacing: 1px; }
+    li .edit:hover {
+      color: #ffd497; }
+  li .tag {
+    color: #00b5bf;
+    font-size: 0.8em;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-family: "Helvetica Neue";
+    letter-spacing: 1px;
+    text-transform: lowercase; }
+
+#undo-template .undo-button {
+  font-family: "Helvetica Neue";
+  font-size: 0.7em;
+  color: #bbbbbb;
+  letter-spacing: 1px;
+  border: 1px solid #e0e0e0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px; }
+  #undo-template .undo-button:hover {
+    color: #ff3e13;
+    border: 1px solid #ff3e13; }
+#undo-template .title, #undo-template .tag {
+  font-style: italic;
+  text-decoration: line-through;
+  color: #bbbbbb; }
+
+.message-blank {
+  font-family: "Helvetica Neue";
+  font-size: 1.7em;
+  color: #777777; }
+
+.start-tracking {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background-color: #777777;
+  border: 1px solid #535353;
+  font-size: 1em;
+  font-family: "Helvetica Neue";
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fefefe; }
+  .start-tracking:hover {
+    background-color: #fc7f62;
+    border: 1px solid #e0e0e0;
+    color: white; }
+
+.elapsed-clock {
+  background-color: #fc7f62; }
+  .elapsed-clock .elapsed {
+    text-transform: uppercase;
+    font-weight: 200;
+    font-family: "Helvetica Neue";
+    letter-spacing: 2px;
+    line-height: 1.5em;
+    color: #fefefe; }
+    .elapsed-clock .elapsed .elapsed-duration {
+      font-size: 1.2em;
+      font-family: "Helvetica Neue";
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #fefefe; }
+
+#new-task, .edit-task {
+  font-size: 1em;
+  font-family: Georgia;
+  color: #535353;
+  background-color: #fefefe;
+  border: 1px dotted #777777;
+  padding: 5px; }
+
+#warning {
+  color: #fc7f62;
+  display: none;
+  font-size: 1em; }
+
+.specs a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #999999;
+  border-bottom: 1px solid #999999; }
+
+#error-message {
+  background-color: #c12704;
+  font-weight: 200;
+  font-family: "Helvetica Neue";
+  letter-spacing: 2px;
+  line-height: 1.5em;
+  color: #fefefe; }
+  #error-message strong {
+    font-weight: 400; }
+  #error-message a, #error-message a:visited {
+    color: white;
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px dotted white; }
+    #error-message a:hover, #error-message a:visited:hover {
+      border-bottom: 1px solid white; }

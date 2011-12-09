@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Jasmine Test Runner</title>
+    <link rel="stylesheet" type="text/css" href="lib/jasmine-1.0.2/jasmine.css">
+    <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine.js"></script>
+    <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine-html.js"></script>
+
+    <!-- Include source files here... -->
+    <script src="/javascripts/vendor/jquery.js"></script>
+    <script src="/javascripts/vendor/underscore.js"></script>
+    <script src="/javascripts/vendor/backbone.js"></script>
+
+    <script src="/javascripts/vendor/backbone-localstorage.js"></script>
+
+    <!-- NOTE: Don't include time_log.js since it kicks off routing and rendering. -->
+    <script src="/javascripts/time_log/util.js"></script>
+    <script src="/javascripts/time_log/models.js"></script>
+    <script src="/javascripts/time_log/collections.js"></script>
+    <!--     <script src="/javascripts/time_log/views.js"></script> -->
+    <!--     <script src="/javascripts/time_log/routers.js"></script> -->
+
+    <!-- Include spec files here... -->
+    <script type="text/javascript" src="/javascripts/time_log_spec/time_log_spec.js"></script>
+
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+      jasmine.getEnv().execute();
+    </script>
+
+  </body>
+</html>

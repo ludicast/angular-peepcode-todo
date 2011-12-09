@@ -1,0 +1,15 @@
+@mixin background-gradient($from, $to, $fallback)
+  background-color: $fallback
+  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to))
+  background: -moz-linear-gradient(top, $from, $to)
+
+@mixin ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  -o-text-overflow: ellipsis
+
+@mixin border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  border-radius: $radius
