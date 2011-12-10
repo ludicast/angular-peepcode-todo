@@ -27,8 +27,15 @@
 					<div class="title-done">{{task.title}}</div>
 					<div class="tag">{{task.tag}}</div>
 				</li>
-			</ul>				
-				
+			</ul>
+
+			<div class="clocks" ng:show="isToday() && hasStarted(tasks)">
+				<div class="total-clock">
+						<time class="total-duration">{{totalDurations() | formatSecondsAsTime}}</time>
+					<div class="total-time">Total</div>
+				</div>
+			</div>
+
 			<ul id="tasks-to-complete" ng:repeat="task in tasks.$filter(TaskViewHelper.isNotCompleted).$orderBy('createdAt', false)">
 				<li class="task" ng:show="!(task.deleted) && !(task.editing)" ng:controller="TaskController">
 					<input class="is-done" type="checkbox" ng:click="finish()" />

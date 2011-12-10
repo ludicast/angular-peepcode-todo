@@ -32,6 +32,11 @@ class @TasksController
 	startTimer:->
 		task = {tag:null, title:"Start", completedAt:@timeStamp(), duration:0, createdAt:@timeStamp()}
 		@createTask task
+		@time = 0
+		setInterval @tick, 1000
+
+	tick:=>
+		@time += 1000
 
 	hasStarted:(tasks = [])->
 		(task for task in tasks when (task.title is "Start")).length > 0
@@ -63,6 +68,20 @@ class @TasksController
 	loadData:->
 		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
 
+	totalDurations:->
+		duration = 0
+		for task in (@tasks or [])
+			if task.duration
+				duration += task.duration
+		duration
+
+	lastCompletedAt:->
+		maxCompletedAt = 0
+		for task in @tasks
+			if task.completedAt and task.completedAt > maxCompletedAt
+				maxCompletedAt = task.completedAt
+		maxCompletedAt
+
 TasksController.$inject = ['$xhr', '$routeParams', '$location']
 
 class @TaskController
@@ -82,10 +101,12 @@ class @TaskController
 
 	finish:->
 		@task.completedAt = @timeStamp()
+		@task.duration = Math.floor((@lastCompletedAt() - @timeStamp()) / 1000)
 		@update()
 
 	unFinish:->
 		@task.completedAt = null
+		@task.duration = null
 		@update()
 
 	update:->
