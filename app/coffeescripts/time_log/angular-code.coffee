@@ -14,6 +14,7 @@ class @TasksController
 		{year, month, date} = $routeParams
 		@currentDate = new Date(year, month, date)
 		@$xhr "get",  "/api/tasks/#{year}/#{parseInt(month) + 1}/#{date}", (code, @tasks)=>
+		setInterval (=> @$apply(->)), 1000
 
 	TaskViewHelper:
 		isCompleted:(task)-> !! task.completedAt
@@ -32,15 +33,13 @@ class @TasksController
 	startTimer:->
 		task = {tag:null, title:"Start", completedAt:@timeStamp(), duration:0, createdAt:@timeStamp()}
 		@createTask task
-		@time = 0
-		setInterval @tick, 1000
 
-	tick:=>
-		@time += 1000
+	hasStarted:->
+		(task for task in (@tasks or []) when (task.title is "Start")).length > 0
 
-	hasStarted:(tasks = [])->
-		(task for task in tasks when (task.title is "Start")).length > 0
-	
+	timeSinceStart:->
+
+
 	createTask:(task)->
 		@$xhr "post", "/api/tasks", task, (code, data)=>
 			@tasks.push data
@@ -68,19 +67,29 @@ class @TasksController
 	loadData:->
 		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
 
-	totalDurations:->
+	totalDurations:(condition)->
+		condition ||= (->true)
 		duration = 0
 		for task in (@tasks or [])
-			if task.duration
+			if task.duration and condition(task)
 				duration += task.duration
 		duration
 
+	totalUntagged:->
+		totalDurations ((task)-> task.tag is null or task.tag.length < 1)
+
+	totalTagged:(tag)->
+		totalDurations ((task)-> task.tag is tag)
+
 	lastCompletedAt:->
 		maxCompletedAt = 0
-		for task in @tasks
+		for task in (@tasks or [])
 			if task.completedAt and task.completedAt > maxCompletedAt
 				maxCompletedAt = task.completedAt
 		maxCompletedAt
+
+	timeSinceStart:->
+		Math.floor((@timeStamp() - @lastCompletedAt()) / 1000)
 
 TasksController.$inject = ['$xhr', '$routeParams', '$location']
 
@@ -100,8 +109,8 @@ class @TaskController
 		@createTask @task
 
 	finish:->
+		@task.duration = Math.floor((@timeStamp() - @lastCompletedAt()) / 1000)
 		@task.completedAt = @timeStamp()
-		@task.duration = Math.floor((@lastCompletedAt() - @timeStamp()) / 1000)
 		@update()
 
 	unFinish:->
