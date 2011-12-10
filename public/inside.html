@@ -12,7 +12,7 @@
 		</nav>
 		<div><h1>{{currentDate.toLocaleDateString()}}</h1></div>
 		<div class="tasks">
-			<p class="message-blank" ng:show="! hasStarted(tasks)">
+			<p class="message-blank" ng:show="isToday() && !(hasStarted(tasks))">
 				<button class="start-tracking" type="Submit" ng:click="startTimer()">Start</button> tracking my time
 			</p>
 
@@ -35,7 +35,6 @@
 				</li>
 
 				<li ng:show="task.editing"  ng:controller="TaskController">
-					<!-- adding form - in that good thin-->
 					<form ng:submit="saveTitle()" >
 						<input type="text" ng:model="task.title" class="edit-task" required/>
 					</form>
@@ -49,7 +48,7 @@
 				</li>
 			</ul>
 		</div>
-		<form ng:submit="addTask()" id="newTaskForm">
+		<form ng:submit="addTask()" id="newTaskForm" ng:show="isToday()">
 			<div class="type">✐</div>
 			<!-- validation placement is off -->
 			<input id="new-task" type="text" placeholder="Type a new task..." ng:model="newTaskValue" required/>

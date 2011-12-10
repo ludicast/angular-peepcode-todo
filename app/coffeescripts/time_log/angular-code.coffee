@@ -54,6 +54,12 @@ class @TasksController
 		@currentDate.setDate(@currentDate.getDate() + 1)
 		@loadData()
 
+	isToday: ->
+		today = new Date()
+		@currentDate.getFullYear() is today.getFullYear() and
+		@currentDate.getMonth() is today.getMonth() and
+		@currentDate.getDate() is today.getDate()
+
 	loadData:->
 		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
 
