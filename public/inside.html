@@ -15,9 +15,10 @@
 			<p class="message-blank" ng:show="! hasStarted(tasks)">
 				<button class="start-tracking" type="Submit" ng:click="startTimer()">Start</button> tracking my time
 			</p>
+
 			<ul id="completed-tasks" ng:repeat="task in tasks.$filter(TaskViewHelper.isCompleted).$orderBy('completedAt', false)">
 				<li class="task" ng:controller="TaskController">
-					<div class="duration">{{task.duration}}</div>
+					<div class="duration">{{task.duration | formatSecondsAsTime}}</div>
 					<input class="is-done" type="checkbox" ng:click="unFinish()" ng:disabled="{{task.title == 'Start'}}" checked  />
 					<div class="title-done">{{task.title}}</div>
 					<div class="tag">{{task.tag}}</div>
@@ -25,6 +26,7 @@
 			</ul>				
 				
 			<ul id="tasks-to-complete" ng:repeat="task in tasks.$filter(TaskViewHelper.isNotCompleted).$orderBy('createdAt', false)">
+				<!-- is li for everything the answer ?-->			
 				<li class="task" ng:show="!(task.deleted) && !(task.editing)" ng:controller="TaskController">
 					<input class="is-done" type="checkbox" ng:click="finish()" />
 					<div class="title">{{ task.title }} </div>

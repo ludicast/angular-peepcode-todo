@@ -5,12 +5,17 @@ class @Router
 		month = d.getMonth()
 		date = d.getDate()
 
-		$route.when "/:year/:month/:date",
+		$route.when "/tasks/:year/:month/:date",
 			template:"/inside.html", controller:TasksController
-		$route.otherwise redirectTo: "/#{year}/#{month}/#{date}"
+		$route.otherwise redirectTo: "/tasks/#{year}/#{month}/#{date}"
+		$route.parent @
+
+		console.log "set routes"
 
 class @TasksController
 	constructor:(@$xhr,@$routeParams,@$location)->
+		console.log @$routeParams
+		console.log @$location
 		{year, month, date} = $routeParams
 		@currentDate = new Date(year, month, date)
 		@$xhr "get",  "/api/tasks/#{year}/#{parseInt(month) + 1}/#{date}", (code, @tasks)=>
@@ -60,7 +65,9 @@ class @TasksController
 		@loadData()
 
 	loadData:->
-		@$location.path "/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
+		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
+
+TasksController.$inject = ['$xhr', '$routeParams', '$location', '$locationConfig']
 
 # implicitly inherits from tasks controller, how this messes up DI I can only guess
 #
@@ -97,3 +104,14 @@ class @TaskController
 		
 	checkSave:()->
 		console.log "oooo"
+
+angular.filter 'formatSecondsAsTime', (seconds) ->
+    secondsInt = parseInt(seconds, 10)
+    hours = parseInt(secondsInt / 60 / 60, 10)
+    minutes = parseInt((secondsInt / 60) % 60, 10)
+    hoursString = if hours > 0 then hours else ''
+    minutesString = if minutes > 9 then minutes else '0' + minutes
+    hoursString + ':' + minutesString
+
+angular.service '$locationConfig', ->
+	{html5Mode: true}
