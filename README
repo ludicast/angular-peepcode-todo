@@ -7,5 +7,6 @@ This example seeks to do a code reduction in LOC
     493    1386   15160
 
     wc app/coffeescripts/time_log/angular-code.coffee 
-    99     232    2368 app/coffeescripts/time_log/angular-code.coffee
+    133     324    3424 app/coffeescripts/time_log/angular-code.coffee
 
+Run `rake server` to run code and browse to localhost:3000
