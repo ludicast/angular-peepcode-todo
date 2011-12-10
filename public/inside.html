@@ -16,6 +16,10 @@
 				<button class="start-tracking" type="Submit" ng:click="startTimer()">Start</button> tracking my time
 			</p>
 
+			<p class="message-blank" ng:show="!(isToday()) && !(hasStarted(tasks))">
+				No tasks were tracked on this day
+			</p>
+
 			<ul id="completed-tasks" ng:repeat="task in tasks.$filter(TaskViewHelper.isCompleted).$orderBy('completedAt', false)">
 				<li class="task" ng:controller="TaskController">
 					<div class="duration">{{task.duration | formatSecondsAsTime}}</div>
