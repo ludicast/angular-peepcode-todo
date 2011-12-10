@@ -26,7 +26,6 @@
 			</ul>				
 				
 			<ul id="tasks-to-complete" ng:repeat="task in tasks.$filter(TaskViewHelper.isNotCompleted).$orderBy('createdAt', false)">
-				<!-- is li for everything the answer ?-->			
 				<li class="task" ng:show="!(task.deleted) && !(task.editing)" ng:controller="TaskController">
 					<input class="is-done" type="checkbox" ng:click="finish()" />
 					<div class="title">{{ task.title }} </div>

@@ -8,19 +8,13 @@ class @Router
 		$route.when "/tasks/:year/:month/:date",
 			template:"/inside.html", controller:TasksController
 		$route.otherwise redirectTo: "/tasks/#{year}/#{month}/#{date}"
-		$route.parent @
-
-		console.log "set routes"
 
 class @TasksController
 	constructor:(@$xhr,@$routeParams,@$location)->
-		console.log @$routeParams
-		console.log @$location
 		{year, month, date} = $routeParams
 		@currentDate = new Date(year, month, date)
 		@$xhr "get",  "/api/tasks/#{year}/#{parseInt(month) + 1}/#{date}", (code, @tasks)=>
 
-	# not sure is scoping makes sense, but seems like a plan
 	TaskViewHelper:
 		isCompleted:(task)-> !! task.completedAt
 		isNotCompleted:(task)-> ! task.completedAt
@@ -42,14 +36,10 @@ class @TasksController
 	hasStarted:(tasks = [])->
 		(task for task in tasks when (task.title is "Start")).length > 0
 	
-	startTime:->
-
-
 	createTask:(task)->
 		@$xhr "post", "/api/tasks", task, (code, data)=>
 			@tasks.push data
 
-	addTask2:-> console.log ",,,"
 	addTask:->
 		@createTask @setTag(title:@newTaskValue,createdAt:@timeStamp())
 		@newTaskValue = ""
@@ -67,15 +57,8 @@ class @TasksController
 	loadData:->
 		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
 
-TasksController.$inject = ['$xhr', '$routeParams', '$location', '$locationConfig']
+TasksController.$inject = ['$xhr', '$routeParams', '$location']
 
-# implicitly inherits from tasks controller, how this messes up DI I can only guess
-#
-# note also double up on LI tags
-#
-# console.log is lost - is that wacky or what?
-#
-# $xhr split between this and superclass - problem
 class @TaskController
 	saveTitle:->
 		@setTag @task
@@ -102,9 +85,6 @@ class @TaskController
 	update:->
 		@$xhr "PUT", "/api/tasks/#{@task.id}", @task, ->
 		
-	checkSave:()->
-		console.log "oooo"
-
 angular.filter 'formatSecondsAsTime', (seconds) ->
     secondsInt = parseInt(seconds, 10)
     hours = parseInt(secondsInt / 60 / 60, 10)
