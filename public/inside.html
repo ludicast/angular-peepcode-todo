@@ -23,7 +23,7 @@
 			<ul id="completed-tasks" ng:repeat="task in tasks.$filter(TaskViewHelper.isCompleted).$orderBy('completedAt', false)">
 				<li class="task" ng:controller="TaskController">
 					<div class="duration">{{task.duration | formatSecondsAsTime}}</div>
-					<input class="is-done" type="checkbox" ng:click="unFinish()" ng:disabled="{{task.title == 'Start'}}" checked  />
+					<input class="is-done" type="checkbox" ng:click="unFinish()" ng:disabled="{{task.title == 'Start'}}" checked />
 					<div class="title-done">{{task.title}}</div>
 					<div class="tag">{{task.tag}}</div>
 				</li>
@@ -34,11 +34,19 @@
 						<time class="total-duration">{{totalDurations() | formatSecondsAsTime}}</time>
 					<div class="total-time">Total</div>
 				</div>
+				<div class="tag-clock">
+					<time class="total-duration">{{totalOther() | formatSecondsAsTime}}</time>
+					<div class="tag">other</div>
+				</div>
+				<div class="tag-clock" ng:repeat="tag in tags()">
+					<time class="total-duration">{{totalTagged(tag) | formatSecondsAsTime}}</time>
+					<div class="tag">{{tag}}</div>
+				</div>
 			</div>
 
 			<div class="elapsed-clock" ng:show="isToday() && hasStarted()">
 				<div class="elapsed">
-								<time class="elapsed-duration">{{ timeSinceStart() | formatSecondsAsTime }}</time> has elapsed
+					<time class="elapsed-duration">{{ timeSinceStart() | formatSecondsAsTime }}</time> has elapsed
 				</div>
 			</div>
 

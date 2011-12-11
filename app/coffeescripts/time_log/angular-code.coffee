@@ -64,6 +64,16 @@ class @TasksController
 		@currentDate.getMonth() is today.getMonth() and
 		@currentDate.getDate() is today.getDate()
 
+	tags:->
+		tags = []
+		for task in (@tasks or [])
+			tag = task.tag
+			if tag and tag.length > 0 and tag isnt "other" and tags.indexOf(tag) is -1 and task.duration
+				tags.push tag
+		tags
+
+
+
 	loadData:->
 		@$location.path "/tasks/#{@currentDate.getFullYear()}/#{@currentDate.getMonth()}/#{@currentDate.getDate()}"
 
@@ -76,10 +86,13 @@ class @TasksController
 		duration
 
 	totalUntagged:->
-		totalDurations ((task)-> task.tag is null or task.tag.length < 1)
+		@totalDurations ((task)-> task.tag is null or task.tag.length < 1 or tag is "other")
 
 	totalTagged:(tag)->
-		totalDurations ((task)-> task.tag is tag)
+		@totalDurations ((task)-> task.tag is tag)
+	
+	totalOther:->
+		@totalDurations ((task)-> task.tag is "other" or task.tag is "" or task.tag is null)
 
 	lastCompletedAt:->
 		maxCompletedAt = 0
@@ -98,7 +111,7 @@ class @TaskController
 		@setTag @task
 		@task.editing = false
 		@update()
-				
+
 	destroy:->
 		@$xhr "DELETE", "/api/tasks/#{@task.id}", (code)=>
 			@task.deleted = true
@@ -119,8 +132,8 @@ class @TaskController
 		@update()
 
 	update:->
-		@$xhr "PUT", "/api/tasks/#{@task.id}", @task, ->
-		
+		@$xhr "PUT", "/api/tasks/#{@task.id}", @task
+
 angular.filter 'formatSecondsAsTime', (seconds) ->
     secondsInt = parseInt(seconds, 10)
     hours = parseInt(secondsInt / 60 / 60, 10)
